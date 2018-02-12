@@ -2,7 +2,7 @@
   "sourceMap": true,
   "instrument": true,
   "include": [
-    "lib/**/*.js"
+    "src/**/*.js"
   ],
   "reporter": ["text", "lcov"]
 }
