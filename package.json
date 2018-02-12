@@ -10,6 +10,7 @@
     "test": "ava 'test/**/*.test.js'",
     "lint": "eslint src",
     "cover": "nyc npm test",
+    "build": "webpack",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "do-publish": "npm run lint && npm run cover && npm publish"
   },
@@ -34,6 +35,12 @@
   "homepage": "https://github.com/jeffkgabriel/react-forum#readme",
   "devDependencies": {
     "ava": "^0.18.2",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
     "babel-register": "^6.24.0",
     "coveralls": "^2.12.0",
     "eslint": "^3.18.0",
@@ -45,7 +52,8 @@
     "sinon": "^2.1.0"
   },
   "dependencies": {
-    "react": "^16.2.0"
+    "react": "^16.2.0",
+    "webpack": "^3.11.0"
   },
   "ava": {
     "require": [
