@@ -2,7 +2,7 @@
   "name": "react-forum",
   "version": "0.0.1",
   "description": "React Forum",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "engines": {
     "node": ">=6.0.0"
   },
