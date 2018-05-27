@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import {getForumData} from '../reducers/forum'
 import ForumLayer from './ForumLayer'
 import Register from './Register'
+import Login from './Login'
 
 import {getUser} from '../reducers/forum'
 
@@ -32,6 +33,7 @@ class Forum extends Component{
       <div className='Forum-Box'>
         forum - {this.props.email} - {this.props.userName} - {this.props.userType}
         <Register {...this.props} />
+        <Login />
         {topLevelForums}
       </div>
     )

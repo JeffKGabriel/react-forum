@@ -24,7 +24,8 @@ class Register extends Component{
 
 const mapStateToProps = ({forum}) => {
   return {
-    members: forum.members
+    members: forum.members,
+    userEmail : forum.userEmail,
   }
 }
 

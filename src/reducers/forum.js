@@ -61,6 +61,13 @@ export function getUser(){
           })
       }else{
         console.log('no user');
+        dispatch({
+          type:UPDATE_USER,
+          email: '',
+          uid: '',
+          userType: '',
+          username: ''
+        })
       }
     })
   }
@@ -77,6 +84,16 @@ export function createAccount(type,email,username,password){
             dispatch(getForumData())
           })
       })
+  }
+}
+
+export function loginUser(email,password){
+  return (dispatch, getState) => {
+    firebaseAuth().signInWithEmailAndPassword(email,password)
+      .then(res=>{
+        console.log('signInWithEmailAndPassword res',res)
+      })
+
   }
 }
 
