@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "ava 'test/**/*.test.js'",
-    "lint": "eslint dist",
+    "lint": "eslint build",
     "cover": "nyc npm test",
     "build": "webpack",
     "watch": "webpack --watch",
@@ -16,12 +16,12 @@
     "do-publish": "npm run lint && npm run cover && npm publish"
   },
   "files": [
-    "dist",
+    "build",
     "LICENSE.md",
     "README.md"
   ],
   "directories": {
-    "dist": "dist"
+    "build": "build"
   },
   "repository": {
     "type": "git",
