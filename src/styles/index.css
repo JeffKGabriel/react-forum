@@ -1,5 +1,37 @@
 
-.main-container{
+.Forum-Box{
   flex-grow: 1;
   background-color: #a4bdfa;
+  pointer-events: auto;
+}
+
+
+.ForumLayer-Box{
+  height: 100px;
+  flex-grow: 1;
+  background-color: silver;
+}
+
+.Register-Box{
+  height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+
+/* REGISTER */
+
+
+/* Create Admin */
+.CreateAdmin-firstTimeSetupBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.CreateAdmin-firstTimeSetupText{
+  margin-bottom: 10px;
 }

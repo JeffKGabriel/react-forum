@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 import { Provider, connect } from 'react-redux'
 
 import './styles/index.css'
-import {ref, fbdb, firebaseAuth} from './firebase.config.js'
 import forum from './reducers/forum.js'
 
 import Forum from './components/Forum'
@@ -24,23 +23,10 @@ class ReactForum extends Component{
     super(props)
   }
 
-  componentDidMount(){
-    console.log('mounted')
-    let app = 'ytradio'
-    fbdb.ref('forum/'+app).once('value')
-      .then(snap=>{
-        let snapVal = snap.val()
-        console.log('snapVal',snapVal)
-      })
-      .catch(err=>{
-        console.log('error',err)
-      })
-  }
-
   render(){
     return(
       <Provider store={store}>
-        <Forum/>
+        <Forum {...this.props}/>
       </Provider>
     )
   }
