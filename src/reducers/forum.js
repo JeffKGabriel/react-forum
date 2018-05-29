@@ -1,22 +1,26 @@
 import * as authHelper from '../firebase.config.js'
 import {ref, fbdb, firebaseAuth, forumConfig} from '../firebase.config.js'
 
-import {addUserAPI,getUserAPI} from '../api/forum'
+import {addUserAPI,getUserAPI,addNewSectionAPI,addNewThreadAPI,addNewPostAPI} from '../api/forum'
 
 const initialState = {
   members : null,
-  sections : [],
-  threads : [],
+  sections : {},
+  threads : {},
+  posts : {},
   userEmail : null,
   userID: null,
   userType: '',
-  userName: null
+  userName: null,
+  activeSection: ''
 }
 
 const UPDATE_FORUM_MEMBERS = "UPDATE_FORUM_MEMBERS"
 const UPDATE_FORUM_SECTIONS = "UPDATE_FORUM_SECTIONS"
 const UPDATE_FORUM_THREADS = "UPDATE_FORUM_THREADS"
 const UPDATE_USER = "UPDATE_USER"
+//const UPDATE_ACTIVE_SECTION = "UPDATE_ACTIVE_SECTION"
+const UPDATE_FORUM_POSTS = "UPDATE_FORUM_POSTS"
 
 
 export function updateForumMembers(members){
@@ -37,6 +41,21 @@ export function updateForumThreads(threads){
     threads
   }
 }
+export function updateForumPosts(posts){
+  return{
+    type : UPDATE_FORUM_POSTS,
+    posts
+  }
+}
+
+/*
+export function updateActiveSection(section){
+  return{
+    type : UPDATE_ACTIVE_SECTION,
+    section
+  }
+}
+*/
 
 export function createUser(type,username,uid){
   return (dispatch, getState) => {
@@ -92,10 +111,56 @@ export function loginUser(email,password){
     firebaseAuth().signInWithEmailAndPassword(email,password)
       .then(res=>{
         console.log('signInWithEmailAndPassword res',res)
+        dispatch({
+          type:UPDATE_USER,
+          email: '',
+          uid: '',
+          userType: '',
+          username: ''
+        })
       })
 
   }
 }
+
+export function logoutUser(email,password){
+  return (dispatch, getState) => {
+    firebaseAuth().signOut()
+      .then(res=>{
+        console.log('firebaseAuth().signOut res',res)
+      })
+
+  }
+}
+
+export function addNewSection(sectionData){
+  return (dispatch, getState) => {
+    addNewSectionAPI(forumConfig.name,sectionData)
+      .then(res=>{
+        console.log('addNewSectionAPI res',res);
+      })
+  }
+}
+
+export function addNewThread(threadData){
+  return (dispatch, getState) => {
+    addNewThreadAPI(forumConfig.name,threadData)
+      .then(res=>{
+        console.log('addNewThreadAPI res',res);
+      })
+  }
+}
+
+export function addNewPost(postData){
+  return (dispatch, getState) => {
+    addNewPostAPI(forumConfig.name,postData)
+      .then(res=>{
+        console.log('addNewPostAPI res',res);
+      })
+  }
+}
+
+
 
 /*
 export function createAdmin(uid,userData){
@@ -120,7 +185,26 @@ export function getForumData(){
           console.log('we have no forum in the DB forum/'+app)
           dispatch(updateForumMembers([]))
         }else{
-          dispatch(updateForumMembers(forumData.users))
+          if(forumData.users){
+            dispatch(updateForumMembers(forumData.users))
+          }
+          if(forumData.threads){
+            dispatch(updateForumThreads(forumData.threads))
+          }
+          if(forumData.posts){
+            dispatch(updateForumPosts(forumData.posts))
+          }
+          if(forumData.sections){
+            dispatch(updateForumSections(forumData.sections))
+          }else{
+            // first time - just make general section
+            dispatch(updateForumSections(
+              'qwe':
+                {
+                  name : 'general'
+                }
+            ))
+          }
         }
         // dispatch(updateForumMembers(forumData.members))
         // dispatch(updateForumSections(forumData.sections))
@@ -151,6 +235,11 @@ export default function forum(state = initialState, action) {
         ...state,
         threads: action.threads
       }
+    case UPDATE_FORUM_POSTS:
+      return{
+        ...state,
+        posts: action.posts
+      }
     case UPDATE_USER:
       return{
         ...state,
@@ -159,6 +248,13 @@ export default function forum(state = initialState, action) {
         userType: action.userType,
         userName: action.username
       }
+    /*
+    case UPDATE_ACTIVE_SECTION:
+      return{
+        ...state,
+        activeSection : action.section
+      }
+    */
 
     default :
       return state

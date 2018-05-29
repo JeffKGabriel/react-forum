@@ -6,18 +6,23 @@
 }
 
 
-.ForumLayer-Box{
+.Section-Box{
   height: 100px;
   flex-grow: 1;
-  background-color: silver;
+  background-color: #EEE;
+  border: 1px solid #333;
+  cursor: pointer;
 }
 
-.Register-Box{
-  height: 200px;
+.ReactForum-RegisterBox{
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.ReactForum-LoginBox{
+
 }
 
 
@@ -26,12 +31,21 @@
 /* REGISTER */
 
 
-/* Create Admin */
-.CreateAdmin-firstTimeSetupBox{
+/* Create User */
+.CreateUser-firstTimeSetupBox{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.CreateAdmin-firstTimeSetupText{
+.CreateUser-firstTimeSetupText{
   margin-bottom: 10px;
+}
+
+
+/* Threads */
+.ThreadItem-Box{
+  width: 100%;
+  height:40px;
+  background-color: #5ca2ff;
+  cursor: pointer;
 }

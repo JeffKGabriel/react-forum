@@ -28,32 +28,40 @@ class Login extends Component{
 
   render(){
     return(
-      <div className='Login-Box'>
-        Login
-        <input
-          className="form-control"
-          id="adminUsername"
-          type="email"
-          aria-describedby="emailHelp"
-          placeholder="Email"
-          onChange={this.handleEmail} />
-        <input
-          className="form-control"
-          type='password'
-          id="adminPassword"
-          placeholder="Password"
-          onChange={this.handlePassword} />
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={this.submitLogin}
-          >
-           Login
-        </button>
+      <div className='ReactForum-LoginBox'>
+        {this.props.userID == '' && this.props.members && this.props.members.length != 0 &&  (
+          <div>
+            <input
+              className="form-control"
+              type="email"
+              aria-describedby="emailHelp"
+              placeholder="Email"
+              onChange={this.handleEmail} />
+            <input
+              className="form-control"
+              type='password'
+              placeholder="Password"
+              onChange={this.handlePassword} />
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={this.submitLogin}
+              >
+               Login
+            </button>
+          </div>
+        )}
       </div>
     )
   }
 
 }
 
-export default connect()(Login)
+const mapStateToProps = ({forum}) => {
+  return {
+    userID : forum.userID,
+    members: forum.members,
+  }
+}
+
+export default connect(mapStateToProps)(Login)

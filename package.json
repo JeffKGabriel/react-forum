@@ -60,9 +60,10 @@
   },
   "dependencies": {
     "bootstrap-css": "^4.0.0-alpha.5",
-    "firebase": "^4.13.1",
+    "firebase": "^4.10.0",
     "react": "^16.4.0",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },

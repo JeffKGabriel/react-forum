@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import CreateAdmin from './Register/CreateAdmin'
+import CreateUser from './Register/CreateUser'
 
 class Register extends Component{
 
-  constructor (props) {
-    super(props)
-  }
-
   render(){
     return(
-      <div className='Register-Box'>
-        register
+      <div className='ReactForum-RegisterBox'>
         { this.props.members && this.props.members.length == 0 &&
-          <CreateAdmin {...this.props} />
+          <CreateUser {...this.props} type='admin' />
+        }
+        { this.props.members && this.props.userID == '' && this.props.members.length != 0 &&
+          <CreateUser {...this.props} type='user' />
         }
       </div>
     )
@@ -26,6 +24,7 @@ const mapStateToProps = ({forum}) => {
   return {
     members: forum.members,
     userEmail : forum.userEmail,
+    userID : forum.userID
   }
 }
 

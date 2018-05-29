@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class ForumLayer extends Component{
+class Post extends Component{
 
   constructor (props) {
     super(props)
@@ -9,12 +9,12 @@ class ForumLayer extends Component{
 
   render(){
     return(
-      <div className='ForumLayer-Box'>
-        {this.props.name}
+      <div className='Post-Box'>
+        Post - {this.props.content}
       </div>
     )
   }
 
 }
 
-export default connect()(ForumLayer)
+export default connect()(Post)
