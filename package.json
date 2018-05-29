@@ -1,6 +1,6 @@
 {
   "name": "react-forum",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "React Forum",
   "main": "build/index.js",
   "engines": {
@@ -61,7 +61,7 @@
   "dependencies": {
     "bootstrap-css": "^4.0.0-alpha.5",
     "firebase": "^4.10.0",
-    "react": "^16.4.0",
+    "react": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
