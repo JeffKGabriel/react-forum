@@ -16,6 +16,11 @@ export function addNewSectionAPI(app,sectionData){
     .push(sectionData)
 }
 
+export function removeSectionAPI(app,sectionId){
+  return ref.child(`forum/${app}/sections/${sectionId}`)
+    .remove()
+}
+
 export function addNewThreadAPI(app,threadData){
   return ref.child(`forum/${app}/threads`)
     .push(threadData)

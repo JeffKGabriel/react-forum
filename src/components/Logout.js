@@ -14,7 +14,7 @@ class Logout extends Component{
       <div className='Logout-Box'>
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn Header-Button"
           onClick={this.submitLogout}
           >
            Logout

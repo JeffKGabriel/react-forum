@@ -25,6 +25,7 @@ class AddNewThread extends Component{
         date: Date.now()
       }
     ))
+    this.props.closeAddNewThread()
   }
 
   render(){

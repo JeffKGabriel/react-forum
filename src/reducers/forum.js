@@ -1,7 +1,7 @@
 import * as authHelper from '../firebase.config.js'
 import {ref, fbdb, firebaseAuth, forumConfig} from '../firebase.config.js'
 
-import {addUserAPI,getUserAPI,addNewSectionAPI,addNewThreadAPI,addNewPostAPI} from '../api/forum'
+import {addUserAPI,getUserAPI,addNewSectionAPI,addNewThreadAPI,addNewPostAPI,removeSectionAPI} from '../api/forum'
 
 const initialState = {
   members : null,
@@ -94,7 +94,7 @@ export function getUser(){
 
 export function createAccount(type,email,username,password){
   return (dispatch, getState) => {
-    firebaseAuth().createUserWithEmailAndPassword(email,password)
+    return firebaseAuth().createUserWithEmailAndPassword(email,password)
       .then(res=>{
         console.log('createUserWithEmailAndPassword res',res);
         dispatch(createUser(type,username,res.uid))
@@ -108,7 +108,7 @@ export function createAccount(type,email,username,password){
 
 export function loginUser(email,password){
   return (dispatch, getState) => {
-    firebaseAuth().signInWithEmailAndPassword(email,password)
+    return firebaseAuth().signInWithEmailAndPassword(email,password)
       .then(res=>{
         console.log('signInWithEmailAndPassword res',res)
         dispatch({
@@ -142,8 +142,20 @@ export function addNewSection(sectionData){
   }
 }
 
+export function removeSection(sectionId){
+  return (dispatch, getState) => {
+    removeSectionAPI(forumConfig.name,sectionId)
+      .then(res=>{
+        console.log('removeSectionAPI res',res);
+      })
+  }
+}
+
+
+
 export function addNewThread(threadData){
   return (dispatch, getState) => {
+    console.log('addNewThread',threadData);
     addNewThreadAPI(forumConfig.name,threadData)
       .then(res=>{
         console.log('addNewThreadAPI res',res);
@@ -177,8 +189,7 @@ export function createAdmin(uid,userData){
 export function getForumData(){
   return (dispatch, getState) => {
     let app = 'ytradio'
-    fbdb.ref('forum/'+app).once('value')
-      .then(snap=>{
+    fbdb.ref('forum/'+app).on('value', snap=>{ //.once()
         let forumData = snap.val()
         console.log('forumData',forumData);
         if(!forumData){
@@ -210,9 +221,11 @@ export function getForumData(){
         // dispatch(updateForumSections(forumData.sections))
         // dispatch(updateForumThreads(forumData.threads))
       })
+      /*
       .catch(err=>{
         console.log('error connecting to DB',err)
       })
+      */
   }
 }
 

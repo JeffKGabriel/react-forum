@@ -9,14 +9,16 @@ class ThreadItem extends Component{
 
   openThread=(id)=>{
     console.log('openThread',id);
-    this.props.history.push(`${this.props.sectionID}/${id}`)
+    this.props.history.push(`${this.props.section}/${id}`)
   }
 
   render(){
-    console.log('thread item props',this.props);
+    let showDate = new Date(this.props.date)
+    showDate = showDate.toLocaleDateString("en-US")
     return(
       <div className='ThreadItem-Box' onClick={()=>{this.openThread(this.props.id)}}>
-        ThreadItem - {this.props.name}
+        <div>{this.props.name}</div>
+        <div>{showDate}</div>
       </div>
     )
   }

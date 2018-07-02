@@ -8,27 +8,70 @@ class ForumView extends Component{
 
   constructor (props) {
     super(props)
+    this.state={
+      showAddNewThread: false
+    }
+  }
+
+  showAddNewThread=()=>{
+    this.setState({showAddNewThread: !this.state.showAddNewThread})
+  }
+
+  closeAddNewThread=()=>{
+    this.setState({showAddNewThread: false})
   }
 
   render(){
 
-    let sectionData = this.props.sections[this.props.sectionID]
+    //console.log('forumview props',this.props);
 
-    const ThreadsArr = Object.keys(this.props.threads).map(i =>{
+    let sectionData = this.props.sections[this.props.sectionID]
+    let forumName = sectionData ? sectionData.name : ''
+
+    console.log('sectionData',sectionData);
+
+    let sectionThreads = Object.keys(this.props.threads).map(a=>{
       return{
-      ...this.props.threads[i],
-      id : i
+        ...this.props.threads[a],
+        id:a
       }
     })
 
-    let displayThreads = ThreadsArr.map((a,k)=>{
-      return <ThreadItem key={k} {...a} {...this.props} />
+    sectionThreads = sectionThreads.filter(a=>a.section == this.props.sectionID)
+
+    sectionThreads = sectionThreads.sort((a,b)=>{
+      console.log('a',a,'b',b)
+      if(a.date > b.date){
+        return -1
+      }else if(b.date > a.date){
+        return 1
+      }else{
+        return 0
+      }
+    })
+
+    let displayThreads = sectionThreads.map((a,k)=>{
+      return <ThreadItem key={k} {...a} history={this.props.history} />
     })
 
     return(
       <div className='ForumView-Box'>
-        ForumView - {this.props.id}
-        <AddNewThread userID={this.props.userID} section={this.props.sectionID}/>
+        <div className='ForumView-Title'>{forumName}</div>
+        {forumName != '' &&
+          <button
+            type="submit"
+            className="ForumView-NewThreadButton"
+            onClick={this.showAddNewThread}
+            >
+             +
+          </button>
+        }
+        {this.state.showAddNewThread &&
+          <AddNewThread
+            userID={this.props.userID}
+            sectionID={this.props.sectionID}
+            closeAddNewThread={this.closeAddNewThread}/>
+        }
         {displayThreads}
       </div>
     )

@@ -13,7 +13,8 @@ class CreateUser extends Component{
       email:'',
       username : '',
       password : '',
-      type : props.type
+      type : props.type,
+      error : ''
     }
     if(!props.standalone){
       this.state.email = props.email
@@ -29,6 +30,12 @@ class CreateUser extends Component{
         this.state.password
       )
     )
+      .then(res=>{
+
+      })
+      .catch(err=>{
+        this.setState({error:err.message})
+      })
   }
 
   handleUsername=(e)=>{
@@ -41,6 +48,12 @@ class CreateUser extends Component{
 
   handlePassword=(e)=>{
     this.setState({password: e.target.value});
+  }
+
+  handleEnter=(e)=>{
+    if (e.key === 'Enter') {
+      this.submitLogin()
+    }
   }
 
   render(){
@@ -64,14 +77,20 @@ class CreateUser extends Component{
                 className="form-control"
                 type='password'
                 placeholder="Password"
+                onKeyPress={this.handleEnter}
                 onChange={this.handlePassword} />
               <button
                 type="submit"
                 className="btn btn-primary"
                 onClick={this.createNewAccount}
                 >
-                 Setup
+                 {this.props.type == 'admin' ?
+                   <div>Setup</div>
+                   :
+                   <div>Register</div>
+                 }
               </button>
+              {this.state.error}
           </div>
         }
         {!this.props.standalone &&
@@ -85,14 +104,20 @@ class CreateUser extends Component{
                className="form-control"
                type='password'
                placeholder="Password"
+               onKeyPress={this.handleEnter}
                onChange={this.handlePassword} />
              <button
                type="submit"
                className="btn btn-primary"
                onClick={this.createNewAccount}
                >
-                Setup
+                 {this.props.type == 'admin' ?
+                   <div>Setup</div>
+                   :
+                   <div>Register</div>
+                 }
              </button>
+             {this.state.error}
            </div>
         }
       </div>

@@ -5,9 +5,8 @@ import { withRouter } from 'react-router-dom'
 
 import {getForumData} from '../reducers/forum'
 import Section from './Section'
-import Register from './Register'
-import Login from './Login'
-import Logout from './Logout'
+import Header from './Header'
+
 import AddNewSection from './AddNewSection'
 import ForumView from './ForumView'
 import Thread from './Thread'
@@ -21,24 +20,29 @@ class Forum extends Component{
 
   constructor (props) {
     super(props)
-    this.state={
-      value : -1
-    }
   }
 
   componentWillMount(){
     this.props.dispatch(getForumData())
     this.props.dispatch(getUser())
+
+    const script = document.createElement("script");
+
+    script.src = "https://use.fontawesome.com/releases/v5.0.13/js/all.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+
   }
 
   componentDidMount(){
   }
 
   render(){
-    console.log('forum this.props',this.props);
+    //console.log('forum this.props',this.props);
 
     let forumPath = this.props.location.pathname.replace(this.props.path,'').split("/")
-    console.log('forumPath',forumPath);
+    //console.log('forumPath',forumPath);
 
     const sectionsArr = Object.keys(this.props.sections).map(i =>{
       return{
@@ -53,13 +57,10 @@ class Forum extends Component{
 
     return(
       <div className='Forum-Box'>
-        forum - {this.props.userName} - {this.props.userType}
-        <Register {...this.props} />
-        <Login />
-        <Logout />
+        <Header {...this.props} forumPath={forumPath} />
 
         {!forumPath[1] &&
-          <div>
+          <div className='Section-Boxes'>
             {topLevelForums}
             {this.props.userType == 'admin' &&
               <AddNewSection />
@@ -86,6 +87,7 @@ const mapStateToProps = ({forum}) => {
     posts: forum.posts,
     members: forum.members,
     sections : forum.sections,
+    threads : forum.threads,
     userEmail : forum.userEmail,
     userID : forum.userID,
     userType : forum.userType,

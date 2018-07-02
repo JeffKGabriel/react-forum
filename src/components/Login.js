@@ -10,7 +10,8 @@ class Login extends Component{
     super(props)
     this.state={
       email:'',
-      password : ''
+      password : '',
+      error: ''
     }
   }
 
@@ -22,15 +23,25 @@ class Login extends Component{
     this.setState({password: e.target.value});
   }
 
+  handleEnter=(e)=>{
+    if (e.key === 'Enter') {
+      this.submitLogin()
+    }
+  }
+
   submitLogin=()=>{
     this.props.dispatch(loginUser(this.state.email,this.state.password))
+      .catch(err=>{
+        this.setState({error:err.message})
+      })
   }
 
   render(){
     return(
-      <div className='ReactForum-LoginBox'>
+      <div>
         {this.props.userID == '' && this.props.members && this.props.members.length != 0 &&  (
-          <div>
+          <div className='ReactForum-LoginBox'>
+            Login
             <input
               className="form-control"
               type="email"
@@ -41,6 +52,7 @@ class Login extends Component{
               className="form-control"
               type='password'
               placeholder="Password"
+              onKeyPress={this.handleEnter}
               onChange={this.handlePassword} />
             <button
               type="submit"
@@ -49,6 +61,7 @@ class Login extends Component{
               >
                Login
             </button>
+            {this.state.error}
           </div>
         )}
       </div>

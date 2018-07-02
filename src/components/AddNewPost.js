@@ -33,9 +33,11 @@ class AddNewPost extends Component{
       <div className='NewPost-Box'>
         Add New Post
         <textarea
-          className="form-control"
+          className="form-control postContent"
           placeholder="Post Content"
-          onChange={this.handlePostContent} />
+          onChange={this.handlePostContent}
+          value={this.state.content}
+        />
         <button
           type="submit"
           className="btn btn-primary"

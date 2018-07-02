@@ -12,6 +12,14 @@ class Thread extends Component{
 
   render(){
 
+    console.log('thread props',this.props);
+
+    let threadData = this.props.threads[this.props.threadID]
+
+    let threadName = threadData ? threadData.name : ''
+
+    console.log('threadData',threadData);
+
     let postsArr = Object.keys(this.props.posts).map(i =>{
       return{
       ...this.props.posts[i],
@@ -23,12 +31,12 @@ class Thread extends Component{
     console.log('postData',postData);
 
     let displayPosts = postData.map((a,k)=>{
-      return <Post key={k} {...a} {...this.props} />
+      return <Post key={k} {...this.props} {...a} />
     })
 
     return(
       <div className='Thread-Box'>
-        Thread - {this.props.threadID}
+        <div className='Thread-Title'>{threadName}</div>
         {displayPosts}
         <AddNewPost {...this.props} />
       </div>
@@ -37,4 +45,10 @@ class Thread extends Component{
 
 }
 
-export default connect()(Thread)
+const mapStateToProps = ({forum}) => {
+  return {
+    threads: forum.threads
+  }
+}
+
+export default connect(mapStateToProps)(Thread)

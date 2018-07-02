@@ -1,18 +1,108 @@
 
 .Forum-Box{
   flex-grow: 1;
-  background-color: #a4bdfa;
   pointer-events: auto;
 }
 
+.Header-Box{
+  display: flex;
+  flex-direction: column;
+}
+.HeaderRow{
+  display: flex;
+  flex-direction: row;
+  flex : 1;
+  justify-content: space-between;
+  padding-left: 14px;
+  font-weight: 300;
+}
+
+.Breadcrumbs-Box{
+  display: flex;
+  flex-direction: row;
+  padding:10;
+}
+
+.BreadcrumbSection{
+  display: flex;
+  flex-direction: row;
+}
+
+.breadcrumbLink{
+  cursor: pointer;
+  margin-left: 4;
+  margin-right: 4;
+  font-weight: 300;
+}
+
+/* Section */
+
+.Section-Boxes{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 .Section-Box{
   height: 100px;
-  flex-grow: 1;
-  background-color: #EEE;
-  border: 1px solid #333;
+  width: 500px;
+  border: 0.5px solid #EEE;
   cursor: pointer;
+  margin: 5px;
+  padding: 12px 15px;
 }
+
+.Section-Top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Section-CloseButton{
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  align-items: flex-end;
+  color: #bbb;
+}
+
+.Section-CloseButton:hover{
+  color:#26a4d2;
+}
+
+.Section-Title{
+  color: #5790DC;
+  font-size: 17px;
+  font-weight: 300;
+}
+
+.Section-Description{
+  margin-top: 10px;
+  color: #AAA;
+  font-weight: 300;
+  margin-left: 11px;
+}
+
+.AddNewSection-Box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.AddNewSection{
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+
+
 
 .ReactForum-RegisterBox{
   width: 100%;
@@ -22,11 +112,24 @@
 }
 
 .ReactForum-LoginBox{
-
+ display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 
 
+/* Header */
 
+.Header-Button{
+  font-size: 14px;
+  /*text-decoration: underline;*/
+  color: #888;
+  font-weight: 300;
+}
+
+.Header-Button:hover{
+  text-decoration: underline;
+}
 
 /* REGISTER */
 
@@ -41,11 +144,89 @@
   margin-bottom: 10px;
 }
 
+/* ForumView */
+
+.ForumView-Box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ForumView-Title{
+  color: #5790DC;
+  font-size: 19px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.ForumView-NewThreadButton{
+  font-size: 28px;
+  font-weight: 300;
+  padding: 0;
+  margin-bottom: 10px;
+  border: none;
+  outline: none;
+}
+
 
 /* Threads */
 .ThreadItem-Box{
-  width: 100%;
+  width: 500px;
   height:40px;
   background-color: #5ca2ff;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0px 10px;
+}
+
+.Thread-Box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Thread-Title{
+  color: #5790DC;
+  font-size: 19px;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+
+/* Posts */
+
+.Post-Box{
+  width: 500px;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.Post-Main{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Post-Details{
+ display: flex;
+ flex-direction: column;
+ align-items: flex-end;
+}
+
+.Post-BottomBorder{
+  width: 100px;
+  height: 1px;
+  border-bottom: 1px solid #eee;
+}
+
+.Post-Content{
+  white-space: pre-line;
+  padding: 10px;
 }
